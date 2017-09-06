@@ -5,7 +5,7 @@
 4. Go to the MAYApython.txt above and copy:
 --------------------------------------------
 
-              COPY THESE CODE
+              COPY THESE CODES
 
 --------------------------------------------
 and paste to your script editor.
