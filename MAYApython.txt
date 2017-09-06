@@ -1,0 +1,155 @@
+import maya.cmds as sb
+sb.file(force=1, new=1)
+
+----------------------
+
+import maya.cmds as sb
+sb.file(rename='myFile.ma')
+sb.file(force=1,save=1,type='mayaAscii')
+
+---------------------
+
+import maya.cmds as sb
+sb.file(rename='myFileBinary.mb')
+sb.file(force=1,save=1,type='mayaBinary')
+
+---------------------
+
+import maya.cmds as sb
+sb.file('myFile.ma',open=1)
+
+---------------------
+
+import maya.cmds as sb
+sb.nurbsPlane(n='myPlane',w=1,lr=1,u=2)
+
+---------------------
+
+import maya.cmds as sb
+sb.nurbsPlane(n='myPlane',w=1,lr=1,u=2)
+
+---------------------
+
+import maya.cmds as sb
+sb.nurbsPlane(w=1,lr=2,v=16)
+
+--------------------
+
+import maya.cmds as sb
+sb.nurbsPlane(n='myplane2',w=1,lr=4,v=4,u=4,ax=[0,0,-1])
+
+-------------------
+
+import maya.cmds as sb
+sb.select('myplane2')
+
+-------------------
+
+import maya.cmds as sb
+sb.select(all=1)
+sb.delete()
+
+------------------
+
+import maya.cmds as sb
+sb.nurbsPlane(n='p1',ax=[1,0,0])
+sb.nurbsPlane(n='p2',ax=[0,1,0])
+sb.nurbsPlane(n='p3',ax=[0,0,1])
+sb.nurbsPlane(n='p5',ax=[-1,0,0])
+sb.nurbsPlane(n='p6',ax=[0,-1,0])
+sb.nurbsPlane(n='p7',ax=[0,0,-1])
+sb.select('p1')
+sb.move(0.5,0,0)
+sb.select('p2')
+sb.move(0,0.5,0)
+sb.select('p3')
+sb.move(0,0,0.5)
+sb.select('p5')
+sb.move(-0.5,0,0)
+sb.select('p6')
+sb.move(0,-0.5,0)
+sb.select('p7')
+sb.move(0,0,-0.5)
+
+------------------
+
+import maya.cmds as sb
+sb.nurbsPlane(n='p1',ax=[1,0,0])
+sb.select('p1')
+sb.move(r=2)
+
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+import maya.cmds as sb
+sb.select('p1','p2')
+
+----------------
+
+import maya.cmds as sb
+sb.nurbsCube(n='ncube',w=1,lr=2,ax=[0,1,0])
+sb.nurbsCube(n='ncube',w=1,hr=2,ax=[0,1,0],)
+sb.nurbsCube(n='ncube4',w=1,u=4,v=4)
+
+---------------
+
+import maya.cmds as sb
+sb.plane(n='plane',s=2,p=[0,2,0],l=2,w=2,r=[90,0,0])
+sb.select('plane')
+sb.move(0,0,0)
+sb.rotate(90,0,0)
+
+--------------
+
+import maya.cmds as sb
+sb.cone(n='cone',ssw=120)
+
+-------------
+
+import maya.cmds as sb
+sb.cone(n='cone4',ssw=270)
+
+------------
+
+import maya.cmds as sb
+sb.cone(n='cone4',s=4,r=2,ax=[0,1,0])
+
+------------
+
+import maya.cmds as sb
+sb.cone(n='cone4',s=4,r=2,hr=4,ax=[0,1,0],p=[0,4,0])
+sb.cone(n='cone4',s=4,r=2,hr=4,ax=[0,-1,0],p=[0,-4,0])
+
+------------
+
+import maya.cmds as sb
+sb.cone(n='cone4',s=4,r=2,hr=4,ax=[0,1,0],p=[0,4,0],nsp=8)
+sb.cone(n='cone4',s=4,r=2,hr=4,ax=[0,-1,0],p=[0,-4,0],nsp=8)
+
+-----------
+
+import maya.cmds as sb
+sb.cylinder(n='cylinder',s=16,nsp=16,hr=4,p=[0,0,2],ax=[0,0,1])
+sb.cylinder(n='cylinder',s=16,nsp=16,hr=4,p=[0,0,-2],ax=[0,0,-1])
+sb.cylinder(n='cylinder',s=16,nsp=16,hr=4,p=[0,2,0],ax=[0,1,0])
+sb.cylinder(n='cylinder',s=16,nsp=16,hr=4,p=[0,-2,0],ax=[0,-1,0])
+
+-----------
+
+import maya.cmds as sb
+sb.sphere(n='name',esw=60)
+
+------------
+
+import maya.cmds as sb
+sb.sphere(n='name',ssw=180,hr=4)
+sb.cone(ax=[0,-1,0],p=[0,-1,0])
+
+------------
+
+import maya.cmds as sb
+sb.sphere(n='name',ssw=180,hr=4,p=[0,2,0])
+sb.cylinder(n='cylinder',p=[0,1,0],ax=[0,1,0])
+sb.cone(ax=[0,-1,0],p=[0,-1,0])
+
+
+
