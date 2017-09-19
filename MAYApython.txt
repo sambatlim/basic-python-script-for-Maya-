@@ -151,5 +151,129 @@ sb.sphere(n='name',ssw=180,hr=4,p=[0,2,0])
 sb.cylinder(n='cylinder',p=[0,1,0],ax=[0,1,0])
 sb.cone(ax=[0,-1,0],p=[0,-1,0])
 
+-----------
 
+import maya.cmds as sb
+sb.torus(n="mytorus",msw=90)
+
+----------
+
+import maya.cmds as sb
+
+sb.torus(n="mytorus",msw=360,r=3,hr=5,ssw=90)
+
+-----------
+
+import maya.cmds as sb
+
+sb.torus(n="mytorus1",hr=0.8,ax=[0,-1,0],p=[0,0.8,0])
+sb.torus(n="mytorus2",hr=0.8,ax=[0,-1,0],p=[0,2.4,0])
+sb.torus(n="mytorus3",hr=0.8,ax=[0,-1,0],p=[0,4,0])
+
+-----------
+
+import maya.cmds as sb
+
+sb.torus(n="mytorus1",hr=0.8,ax=[0,-1,0],p=[0,0.8,0],nsp=5,s=11)
+sb.torus(n="mytorus2",hr=0.8,ax=[0,-1,0],p=[0,2.4,0],nsp=5,s=11)
+sb.torus(n="mytorus3",hr=0.8,ax=[0,-1,0],p=[0,4,0],nsp=5,msw=2)
+
+-----------
+
+import maya.cmds as sb
+
+sb.circle(n="1",r=5)
+sb.circle(n="2",r=5,nr=(0,1,0),sw=180)
+sb.circle(n="2",r=5,nr=(1,1,0),sw=180)
+sb.circle(n="2",r=5,nr=(1,1,0),sw=180,s=6)
+
+sb.nurbsSquare(n="1",sl1=4,sl2=5)
+
+-----------
+
+import maya.cmds as sb
+sb.textCurves(f='Constantia',t="SambatLim")
+
+------------
+
+import maya.cmds as sb
+myVar="Sambat Lim"
+sb.textCurves(f='Cooper',t = myVar)
+
+def ConeCreate():
+    mx.cone(n="c1")
+ConeCreate()
+
+------------
+
+import maya.cmds as sb
+def createwhat(choice):
+    if choice==1:
+        sb.cone(n="c1")
+        
+    if choice==2:
+        sb.cylinder(n="c2")
+    if choice==3:
+        sb.sphere(n="s1")
+        
+createwhat(2)
+
+------------
+
+import maya.cmds as sb
+def createwhat(choice):
+    if choice==1:
+        sb.cone(n="c1")
+        
+    if choice==2:
+        sb.cylinder(n="c2")
+    if choice==3:
+        sb.sphere(n="s1")
+
+c=input("Enter 1 2 3")        
+createwhat(c)
+-----------
+
+import maya.cmds as sb
+import random
+def create(n):
+    for i in range (1,n+1):
+        x=random.randint(-50,50)
+        y=random.randint(-50,50)
+        sb.cone(p=[0,1,0],ax=[0,1,0])
+        sb.move(i*2,x,y)
+        
+
+n=input("Enter number")
+create(n)
+
+--------------
+
+import maya.cmds as sb
+import random
+def create(n):
+    for i in range (1,n+1):
+        x=random.randint(-50,50)
+        y=random.randint(-50,50)
+        sb.cone(p=[0,1,0],ax=[0,1,0])
+        sb.move(x,0,y)
+        
+
+n=input("Enter number")
+create(n)
+
+------------------------
+
+import maya.cmds as sb
+from random import*
+def create(n):
+    for i in range (1,n+1):
+        x=randint(-50,50)
+        y=randint(-50,50)
+        sb.cone(p=[0,1,0],ax=[0,1,0])
+        sb.move(x,0,y)
+        
+
+n=input("Enter number")
+create(n)
 
