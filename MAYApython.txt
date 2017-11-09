@@ -277,3 +277,214 @@ def create(n):
 n=input("Enter number")
 create(n)
 
+---------------------
+
+import maya.cmds as sb
+
+sb.polyCone(n="Cone1",r=4,h=1)
+sb.polyCone(n="Cone1",r=4,h=1,sx=4)
+sb.polyCone(n="Cone1",r=4,h=1,sx=4,sz=3)
+def create():
+    for i in range (3,9):
+        sb.polyCone(sx=i)
+        sb.move((i-3)*2,1,0)
+        
+create()
+
+-----------------------
+
+#Move relative
+
+import maya.cmds as sb
+
+sb.polyCone(n="Cone1",r=4,h=1)
+sb.polyCone(n="Cone1",r=4,h=1,sx=4)
+sb.polyCone(n="Cone1",r=4,h=1,sx=4,sz=3)
+def create():
+    for i in range (3,9):
+        sb.polyCone(sx=i)
+        sb.move((i-3)*2,1,0,r=1)
+        
+create()
+
+---------------------
+
+import maya.cmds as sb
+
+sb.polyCube(n="cube",w=2,d=2,h=5)
+sb.move(0,2.5,0)
+sb.select("cube")
+
+---------------------
+
+import maya.cmds as sb
+
+sb.polyCube(n="cube",w=2,d=2,h=5)
+sb.move(0,2.5,0)
+sb.select("cube")
+
+def chh():
+    for i in range(1,11):
+        y=i*2
+        sb.polyCube(w=2,d=2,h=y)
+        sb.move(-(i*2),y/2,0)
+        sb.polyCube(w=2,d=2,h=y)
+        sb.move(0,y/2,-(i*2))
+        sb.polyCube(w=2,d=2,h=y)
+        sb.move(i*2,y/2,0)
+        sb.polyCube(w=2,d=2,h=y)
+        sb.move(0,y/2,i*2)
+        
+chh()
+
+----------------------
+
+import maya.cmds as sb
+
+sb.polyCylinder(n="c1",r=1,h=4,sx=3)
+sb.polyCylinder(n="c2",r=1,h=4,sy=2)
+sb.polyCylinder(n="c3",r=1,h=4,sz=2)
+
+----------------------
+
+import maya.cmds as sb
+
+sb.polyCylinder(n="tire",r=4,ax=(0,0,1),sx=4,sy=4,sz=8)
+
+----------------------
+
+import maya.cmds as sb
+
+def tire():
+    sb.polyCylinder(n="tire",r=4,ax=(0,0,1),sx=16,sy=4,sz=4)
+    sb.move(10,0,8)
+    sb.polyCylinder(n="tire",r=4,ax=(0,0,1),sx=16,sy=4,sz=4)
+    sb.move(10,0,-8)
+    sb.polyCylinder(n="tire",r=4,ax=(0,0,1),sx=16,sy=4,sz=4)
+    sb.move(-10,0,-8)
+    sb.polyCylinder(n="tire",r=4,ax=(0,0,1),sx=16,sy=4,sz=4)
+    sb.move(-10,0,8)
+    sb.polyCube(n="car",w=28,d=14,h=1)
+    
+tire()
+
+------------------------
+
+import maya.cmds as sb
+
+sb.polyHelix(n="Helix",c=5,h=5,r=0.2,d=0)
+sb.move(0,2.5,0)
+sb.polyCylinder(h=7,r=0.25)
+sb.move(0,2.5,0)
+
+------------------------
+
+import maya.cmds as sb
+
+def ch():
+    sb.polyHelix(n="Helix",c=5,h=10)
+    sb.move(0,2.5,0)
+    sb.polyCylinder(h=10,r=0.5)
+    sb.move(0,2.5,0)
+    sb.polyHelix(n="Helix",c=5,h=10,sa=16)
+    
+ch()
+
+----------------------
+
+import maya.cmds as sb
+
+def ch():
+    sb.polyHelix(n="Helix",c=5,h=10)
+    sb.move(0,2.5,0)
+    sb.polyCylinder(h=10,r=0.5)
+    sb.move(0,2.5,0)
+    sb.polyHelix(n="Helix",c=5,h=10,sa=16)
+    sb.polyHelix(n="Helix",c=5,h=10,sa=16,sco=100)
+    
+ch()
+
+---------------------
+
+import maya.cmds as sb
+
+sb.polyPipe(n="pipe",r=2,h=5,t=0.5,ax=(0,0,1),sh=8,sc=4,sa=3)
+
+-----------------------
+import maya.cmds as sb
+
+sb.polyPlane(n="plane",w=4,h=4,sh=8)
+
+-----------------------
+
+import maya.cmds as sb
+
+sb.polyPrism(n="poly",w=3,l=8,ns=3)
+
+-----------------------
+
+import maya.cmds as sb
+
+def buildprism():
+    for i in range(3,17):
+        sb.polyPrism(n="prism",ns=i,w=0.5)
+        sb.move(0,0,i*2)
+        
+buildprism()
+
+--------------------
+
+import maya.cmds as sb
+
+sb.polyPyramid(n="Pyramid",w=3,ns=3)
+sb.polyPyramid(n="Pyramid",w=3,ns=4)
+
+-------------------
+
+import maya.cmds as sb
+
+sb.polySphere(n="ss",r=5)
+
+-------------------
+
+import maya.cmds as sb
+
+sb.polyTorus(n="tr",r=3,sr=2,sy=3,sx=4,tw=30)
+-------------------
+
+import maya.cmds as sb
+
+def torus():
+    for i in range(1,11):
+        if i%2==0:
+            sb.polyTorus(n="torus",sx=3,sy=3)
+            sb.move(i,0,0)
+        else:
+            sb.polyTorus(n="torus",sx=3,sy=3,ax=(0,0,1))
+            sb.move(i,0,0)
+            
+torus()
+
+-----------------------
+
+import maya.cmds as sb
+
+def torus():
+    
+    for i in range(1,5):
+        sb.polyTorus(n="tr",r=1,sx=3,sy=3)
+        sb.move(i*2,0,0)
+        
+    for i in range(1,5):
+        sb.polyTorus(n="tr",r=1,sx=3,sy=3,ax=(0,0,1))
+        sb.move(i*2+1,0,0)
+        
+        
+        
+        
+torus()
+        
+---------------------
+
+
+
