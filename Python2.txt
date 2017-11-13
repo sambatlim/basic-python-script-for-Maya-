@@ -342,5 +342,10 @@ create()
 #o=offset
 
 ------------------------------------
+import maya.cmds as sb
+sb.polyCube(n='mcube')
+sb.polyBevel('.f[0:5]',o=0.5,sg=5)
+
+#sg=segment
 
     
