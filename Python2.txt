@@ -353,4 +353,23 @@ import maya.cmds as sb
 sb.polyCube(n='mcube',w=4,d=4,h=4)
 sb.polyBevel('.f[2:4]',o=1,sg=10)
 
-    
+---------------------------------
+import maya.cmds as sb
+sb.polyCube(n='b')
+sb.select('b.f[1]')
+sb.polyExtrudeFacet(ltz=0.2,off=0,kft=1)
+
+#Extrude with decrease the face size to z direction 0.2
+
+------------------------------
+import maya.cmds as sb
+sb.polyCube(n='a',sx=3,sy=3,sz=3)
+sb.polyBevel(o=0.08)
+sb.polyExtrudeFacet(kft=0,ltz=0.2)
+
+#Weapon
+-------------------------------
+import maya.cmds as sb
+sb.polyCube(n='a',sx=3,sy=3,sz=3)
+sb.polyExtrudeFacet(kft=0,ltz=0.2)
+sb.polyBevel(o=0.08)
