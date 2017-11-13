@@ -348,4 +348,9 @@ sb.polyBevel('.f[0:5]',o=0.5,sg=5)
 
 #sg=segment
 
+---------------------------------
+import maya.cmds as sb
+sb.polyCube(n='mcube',w=4,d=4,h=4)
+sb.polyBevel('.f[2:4]',o=1,sg=10)
+
     
