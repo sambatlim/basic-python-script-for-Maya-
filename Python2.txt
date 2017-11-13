@@ -373,3 +373,10 @@ import maya.cmds as sb
 sb.polyCube(n='a',sx=3,sy=3,sz=3)
 sb.polyExtrudeFacet(kft=0,ltz=0.2)
 sb.polyBevel(o=0.08)
+
+-------------------------------
+import maya.cmds as sb
+sb.polyCone(n='a',ax=(0,-1,0))
+sb.polySphere(n='b')
+sb.move(0,1.5,0)
+sb.group('a','b',n='c')
