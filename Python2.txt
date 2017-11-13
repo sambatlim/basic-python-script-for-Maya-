@@ -380,3 +380,39 @@ sb.polyCone(n='a',ax=(0,-1,0))
 sb.polySphere(n='b')
 sb.move(0,1.5,0)
 sb.group('a','b',n='c')
+
+-------------------------------
+import maya.cmds as sb
+sb.polyCone(n='a',ax=(0,-1,0))
+sb.polySphere(n='b')
+sb.move(0,1.5,0)
+sb.group('a','b',n='c')
+sb.select('c')
+sb.move(5,5,5)
+sb.select('c')
+for i in range(0,10):
+    sb.duplicate()
+    sb.move(i*5,5,5)
+    
+----------------------------------
+
+import maya.cmds as sb
+import random
+sb.polyPlane(n='mplane',w=10,h=10)
+for i in range (sb.polyEvaluate(v=1)):
+    sb.move(random.random(),'.vtx[%d]'%i,y=1)
+    
+----------------------------------
+import maya.cmds as sb
+import random
+sb.polyCylinder(n='body',r=0.1,h=5)
+sb.polySphere(n='head',r=0.2)
+sb.move(0,2.5,0)
+sb.polyTorus(n='ring',r=.2,sr=0.1)
+sb.move(0,1.5,0)
+sb.group('body','head','ring',n='new')
+for i in range (0,25):
+    sb.duplicate()
+    sb.move(random.randrange(-20,20),0,random.randrange(-20,20))
+    
+-----------------------------------
