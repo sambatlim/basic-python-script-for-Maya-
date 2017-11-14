@@ -402,6 +402,8 @@ sb.polyPlane(n='mplane',w=10,h=10)
 for i in range (sb.polyEvaluate(v=1)):
     sb.move(random.random(),'.vtx[%d]'%i,y=1)
     
+    #sb.move(value that you want to move,(Face,Edge,Vtx),y=1 #y direction)
+    
 ----------------------------------
 import maya.cmds as sb
 import random
