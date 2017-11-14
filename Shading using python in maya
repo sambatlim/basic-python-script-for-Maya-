@@ -6,3 +6,21 @@ sb.setAttr(myshader+'.color',0.7,0.3,0.5,type='double3')
 sb.select('a')
 sb.hyperShade(assign=myshader)
 ---------------------------------------
+import maya.cmds as sb
+
+myshadeR=sb.shadingNode('lambert',asShader=1,n='R')
+sb.setAttr(myshadeR+'.color',1,0,0,type='double3')
+
+myshadeG=sb.shadingNode('lambert',asShader=1,n='G')
+sb.setAttr(myshadeG+'.color',0,1,0,type='double3')
+
+myshadeB=sb.shadingNode('lambert',asShader=1,n='B')
+sb.setAttr(myshadeB+'.color',0,0,1,type='double3')
+
+sb.polyCone(n='ff')
+sb.hyperShade(assign='R')
+
+sb.polyCone(n='dd')
+sb.hyperShade(assign='R')
+sb.move(3,0,0)
+-------------------------------------------
