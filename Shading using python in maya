@@ -1,1 +1,8 @@
-
+---------------------------------------
+import maya.cmds as sb
+sb.polyCube(n='a',w=2,d=2)
+myshader=sb.shadingNode('lambert',asShader=1)
+sb.setAttr(myshader+'.color',0.7,0.3,0.5,type='double3')
+sb.select('a')
+sb.hyperShade(assign=myshader)
+---------------------------------------
