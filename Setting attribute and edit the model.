@@ -464,3 +464,49 @@ for i in range(0,25):
 
 
 -------------------------------------------
+
+import maya.cmds as sb
+import random
+
+top=sb.shadingNode('blinn',asShader=1,n='head1')
+sb.setAttr(top+'.color',0,1,0,type='double3')
+
+middle=sb.shadingNode('phong',asShader=1,n='body1')
+sb.setAttr(middle+'.color',0.54,0.27,0.074,type='double3')
+
+storus=sb.shadingNode('blinn',asShader=1,n='ring1')
+sb.setAttr(storus+'.color',0,0,1,type='double3')
+
+py=sb.shadingNode('blinn',asShader=1,n='base1')
+sb.setAttr(py+'.color',0,1,0,type='double3')
+
+
+
+sb.polyCylinder(n='body',r=0.1,h=3)
+sb.hyperShade(assign='body1')
+
+sb.polySphere(n='head',r=0.5)
+sb.move(0,2,0)
+sb.hyperShade(assign='head1')
+
+sb.polyTorus(n='ring',sr=0.1,r=0.2)
+sb.move(0,1,0)
+sb.hyperShade(assign='ring1')
+
+sb.polyPyramid(n='pyramid')
+sb.move(0,-1.5,0)
+sb.hyperShade(assign='base1')
+
+
+sb.setAttr('head1.glowIntensity',0.05)
+sb.setAttr('ring1.glowIntensity',0.3)
+sb.setAttr('base1.glowIntensity',0.0005)
+
+
+sb.group('body','head','ring','pyramid',n='new')
+for i in range(0,25):
+    sb.duplicate()
+    sb.move(random.randrange(-20,20),0,random.randrange(-20,20))
+
+
+--------------------------------------------------
