@@ -118,3 +118,25 @@ for i in range(0,25):
 
 
 --------------------------------------------------
+
+#last class
+
+import maya.cmds as sb
+
+
+sb.polyPlane(n='plane')
+for i in range(0,100,2):
+    
+    if(i/10)%2==0:
+        myShaderr=sb.shadingNode('lambert',asShader=1,n='red')
+        sb.setAttr(myShaderr+'.color',1,0,0,type='double3')
+        sb.select('plane.f['+str(i)+']',add=1)
+        sb.polyExtrudeFacet(kft=0,ltz=0.02)
+        sb.hyperShade(a=myShaderr)
+    else:
+        myShaderb=sb.shadingNode('lambert',asShader=1,n='blue')
+        sb.setAttr(myShaderb+'.color',0,0,1,type='double3')
+        sb.select('plane.f['+str(i+1)+']',add=1)
+        sb.hyperShade(a=myShaderb)
+        
+ -----------------------------------------------
