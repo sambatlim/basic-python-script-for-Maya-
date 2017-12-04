@@ -279,6 +279,8 @@ for i in range(0,sb.polyEvaluate('c',v=1)):
     d=sb.xform('c.vtx['+str(i)+']',q=1,t=1,ws=1)
     sb.polySphere()
     sb.move(d[0],d[1],d[2],r=1)
+    
+#t=translate, ws= world space, q=query.
 --------------------
 
 import maya.cmds as sb
