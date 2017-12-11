@@ -1,0 +1,54 @@
+import maya.cmds as sb
+import random
+
+roadshade=sb.shadingNode('lambert',asShader=1)
+sb.setAttr(roadshade+'.color',0.2,0.3,0.5,type='double3')
+
+
+sb.polyPlane(n='base',w=50,h=50,sw=20,sh=20)
+
+sb.polyCube(n='building',h=6,w=2,d=2,sw=10,sh=10,sd=10)
+sb.select('building')
+sb.move(-1,3,2)
+sb.polyCube(n='building2',h=7,w=2,d=3)
+sb.move(-1,3.5,-3)
+
+for i in range(100,120):
+    roadshade=sb.shadingNode('lambert',asShader=1)
+    sb.setAttr(roadshade+'.color',0.2,0.3,0.5,type='double3')
+    sb.select('base.f['+str(i)+']',add=1)
+    sb.hyperShade(a=roadshade)
+    
+sb.polyCube(n='basebottom',w=50,d=50,h=4)
+sb.move(0,-2.01,0)
+
+baseshade=sb.shadingNode('lambert',asShader=1)
+sb.setAttr(baseshade+'.color',0.1,0.3,0.5,type='double3')
+sb.select('basebottom')
+sb.hyperShade(a=baseshade)
+
+for i in range(10,sb.polyEvaluate('base',f=1),20):
+    
+    roadshade=sb.shadingNode('lambert',asShader=1)
+    sb.setAttr(roadshade+'.color',0.2,0.3,0.5,type='double3')
+    sb.select('base.f['+str(i)+']',add=1)
+    sb.hyperShade(a=roadshade)
+    
+for i in range(300,320):
+    roadshade=sb.shadingNode('lambert',asShader=1)
+    sb.setAttr(roadshade+'.color',0.2,0.3,0.5,type='double3')
+    sb.select('base.f['+str(i)+']',add=1)
+    sb.hyperShade(a=roadshade)
+    
+sb.polyCone(n='cone')
+sb.polyCylinder(n='tree',r=0.2)
+sb.select('cone')
+sb.move(0,2,0)
+sb.group('cone','tree',n='treenew')
+for i in range(0,20):
+    sb.duplicate()
+    sb.move(random.randrange(0,20),0,random.randrange(-10,0))
+
+
+
+
