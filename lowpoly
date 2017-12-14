@@ -1,0 +1,201 @@
+import maya.cmds as sb
+import random
+
+upperlayershade=sb.shadingNode('lambert',asShader=1)
+sb.setAttr(upperlayershade+'.color',0.2,0.3,0.3,type='double3')
+
+buildingshade=sb.shadingNode('lambert',asShader=1)
+sb.setAttr(buildingshade+'.color',0.2,0.1,0.4,type='double3')
+
+sb.polyPlane(n='base',w=50,h=50,sw=20,sh=20)
+sb.hyperShade(a=upperlayershade)
+
+sb.polyCube(n='building',h=20,w=6,d=6,sw=5,sh=20,sd=10)
+sb.select('building')
+sb.move(-6,10,4)
+sb.hyperShade(a=buildingshade)
+
+sb.polyCube(n='building2',h=5,w=2,d=2)
+sb.move(-6,20,4)
+
+for i in range(100,120):
+    roadshade=sb.shadingNode('lambert',asShader=1)
+    sb.setAttr(roadshade+'.color',0.2,0.3,0.5,type='double3')
+    sb.select('base.f['+str(i)+']',add=1)
+    sb.hyperShade(a=roadshade)
+    
+sb.polyCube(n='basebottom',w=50,d=50,h=4)
+sb.move(0,-2.01,0)
+
+baseshade=sb.shadingNode('lambert',asShader=1)
+sb.setAttr(baseshade+'.color',0.1,0.3,0.5,type='double3')
+sb.select('basebottom')
+sb.hyperShade(a=baseshade)
+
+for i in range(10,sb.polyEvaluate('base',f=1),20):
+    
+    roadshade=sb.shadingNode('lambert',asShader=1)
+    sb.setAttr(roadshade+'.color',0.2,0.3,0.5,type='double3')
+    sb.select('base.f['+str(i)+']',add=1)
+    sb.hyperShade(a=roadshade)
+    
+for i in range(300,320):
+    roadshade=sb.shadingNode('lambert',asShader=1)
+    sb.setAttr(roadshade+'.color',0.2,0.3,0.5,type='double3')
+    sb.select('base.f['+str(i)+']',add=1)
+    sb.hyperShade(a=roadshade)
+    
+sb.polyCone(n='cone')
+sb.polyCylinder(n='tree',r=0.2)
+sb.select('cone')
+sb.move(0,2,0)
+sb.group('cone','tree',n='treenew')
+sb.move(-1,0,15)
+for i in range(0,30):
+    sb.duplicate()
+    sb.move(random.randrange(-24,0),0,random.randrange(15,25))
+for i in range(0,5):
+    zebrashade=sb.shadingNode('lambert',asShader=1)
+    sb.setAttr(zebrashade+'.color',1,1,1,type='double3')
+    sb.polyCylinder(n='zebracross',r=0.03,ax=[1,0,0])
+    sb.hyperShade(a=zebrashade)
+    sb.move(0,-0.009,i*0.5)
+    
+sb.group('zebracross','zebracross1','zebracross2','zebracross3','zebracross4',n='newzebra')
+sb.select('newzebra')
+sb.move(-1,0,10.25)
+sb.duplicate()
+sb.move(3.5,0,10.25)
+sb.duplicate()
+sb.move(3.5,0,-14.75)
+sb.duplicate()
+sb.move(-1,0,-14.75)
+sb.duplicate()
+sb.rotate(0,90,0)
+sb.move(1.25,0,-12.5)
+sb.duplicate()
+sb.rotate(0,90,0)
+sb.move(1.25,0,-17)
+
+sb.duplicate()
+sb.rotate(0,90,0)
+sb.move(1.25,0,12.5)
+sb.duplicate()
+sb.rotate(0,90,0)
+sb.move(1.25,0,8)
+
+
+for i in range(1,8):
+    name="stadium"+str(i)
+    sb.polyCube(n=name,w=0.5,d=5,h=0.5)
+    sb.move(i*0.5,0,0)
+    sb.setAttr(name+".scaleY",i*2)
+    
+sb.group('stadium1','stadium2','stadium3','stadium4','stadium5','stadium6','stadium7',n='stadiumladder')
+sb.sphere(n='roof',r=5,ssw=270)
+sb.rotate(0,-90,0)
+sb.move(0,3,0)
+
+sb.group('roof','stadiumladder',n='wholestadium')
+
+sb.move(21.0,0,19)
+sb.duplicate()
+sb.rotate(0,180,0)
+sb.move(4,0,19)
+
+for i in range(1,6):
+    name="stadium2"+str(i)
+    sb.polyCube(n=name,w=0.5,d=11,h=0.5)
+    sb.move(i*0.5,0,0)
+    sb.setAttr(name+".scaleY",i*2)
+sb.group('stadium21','stadium22','stadium23','stadium24','stadium25',n='newstadium2')
+sb.rotate(0,-90,0)
+sb.sphere(n='roof2',r=7,ssw=250)
+sb.select('newstadium2')
+sb.move(13.75,0,23)
+sb.select('roof2')
+sb.rotate(0,180,0)
+sb.move(15.25,2.5,21)
+
+sb.polyPlane(n='footballfield',w=10,h=5,sw=20,sh=20)
+sb.move(15.25,0.1,18.5)
+
+fieldshade=sb.shadingNode('lambert',asShader=1)
+sb.setAttr(fieldshade+'.color',0,0.85,0,type='double3')
+sb.select('footballfield')
+sb.hyperShade(a=fieldshade)
+
+for i in range(1,4):
+    sb.polyCylinder(n='border',r=0.03,h=20,ax=[1,0,0])
+    sb.move(0,i*0.5,0)
+    
+sb.group('border','border1','border2',n='newborder')
+for i in range(1,20):
+    sb.polyCylinder(n='pose',r=0.03)
+    sb.move(i*1,1,0)
+    
+sb.group('pose','pose1','pose2','pose3','pose4','pose5','pose6','pose7','pose8','pose9'\
+,'pose10','pose11','pose12','pose13','pose14','pose15','pose16','pose17','pose18',n='newpose')
+
+sb.move(-10,0,0)
+sb.group('newpose','newborder',n='newnewborder')
+sb.move(15,0,13)
+
+
+sb.polyPlatonicSolid(n='leaf',r=1)
+sb.move(0,2,0)
+sb.polyCylinder(n='treetree',r=0.2)
+sb.move(0,0.5,0)
+sb.group('leaf','treetree',n='wholetreenew')
+sb.move(5,0,-16)
+for i in range(0,20):
+    sb.duplicate()
+    sb.move(random.randrange(5,25),0,random.randrange(-23,-16))
+    
+sb.select('newnewborder')
+sb.duplicate()
+sb.move(-13,0,-16)
+
+sb.polyCube(n='besidehouse',w=5,d=6,h=2.5,sw=10,sh=10,sd=10)
+sb.move(0,1.25,0)
+sb.select('besidehouse.f[410:415]','besidehouse.f[420:425]','besidehouse.f[430:435]','besidehouse.f[440:445]'\
+,'besidehouse.f[450:455]')
+sb.polyExtrudeFacet(ltz=-1)
+sb.select('besidehouse.f[490:499]')
+sb.polyExtrudeFacet(ltz=0.25)
+sb.polyPrism(n='roofbeside',ax=[0,0,1],l=6,w=3)
+sb.rotate(0,0,-30)
+sb.move(-1.25,3,0)
+sb.polyPrism(n='rooffront',ax=[0,0,1],l=3,w=3)
+sb.rotate(0,0,-30)
+sb.move(1.25,3,1.5)
+sb.polyCylinder(n='housepose',r=0.1,ax=[0,1,0])
+sb.move(2.25,1,-2.5)
+sb.group('besidehouse','roofbeside','rooffront','housepose',n='househousebeside')
+sb.move(-4,0,-20)
+sb.duplicate()
+sb.move(-12,0,-20)
+sb.duplicate()
+sb.move(-20,0,-20)
+sb.polyPyramid(n='pyramid')
+
+doorbuilding=sb.shadingNode('lambert',asShader=1)
+sb.setAttr(doorbuilding+'.color',0.2,0.3,0.4,type='double3')
+
+sb.select('building.f[313:316]','building.f[303:306]')
+sb.hyperShade(a=doorbuilding)
+
+for i in range(328,498,10):
+    sb.select('building.f['+str(i)+']',add=1)
+    
+for i in range(326,496,10):
+    sb.select('building.f['+str(i)+']',add=1)
+ 
+for i in range(324,494,10):
+    sb.select('building.f['+str(i)+']',add=1)
+    
+for i in range(322,492,10):
+    sb.select('building.f['+str(i)+']',add=1)
+    
+for i in range(320,490,10):
+    sb.select('building.f['+str(i)+']',add=1)
