@@ -1,0 +1,593 @@
+-------------------------------
+import maya.cmds as sb
+sb.window(title='basic window test1',widthHeight=(250,500),maximizeButton=False,minimizeButton=False,sizeable=False)
+sb.showWindow()
+
+------------------------------
+
+import maya.cmds as sb
+sb.window(title='basic window test1',widthHeight=(250,500),maximizeButton=False,minimizeButton=False,sizeable=False)
+sb.columnLayout(columnWidth=200)
+
+sb.button(label='1',width=250)
+sb.button(label='click me2')
+sb.button(label='click me3')
+sb.button(label='click me4')
+sb.button(label='click me5')
+
+sb.showWindow()
+
+------------------------------
+
+import maya.cmds as sb
+sb.window(title='basic window test1',widthHeight=(250,500),maximizeButton=False,minimizeButton=False,sizeable=False)
+sb.columnLayout(columnWidth=200,rowSpacing=10)
+
+sb.button(label='1',width=250)
+sb.button(label='click me2')
+sb.button(label='click me3')
+sb.button(label='click me4')
+sb.button(label='click me5')
+
+sb.showWindow()
+
+---------------------------
+
+import maya.cmds as sb
+sb.window(title='basic window test1',widthHeight=(250,500),maximizeButton=False,minimizeButton=False,sizeable=False,backgroundColor=[0.5,0.2,0.3])
+sb.columnLayout(columnWidth=200,rowSpacing=10)
+
+sb.button(label='create polycone',width=250,bgc=[0.2,0.15,0.3])
+sb.button(label='create polyCube',width=250,bgc=[0.2,0.15,0.3])
+sb.button(label='create sphere',width=250,bgc=[0.2,0.15,0.3])
+sb.button(label='create polyplane',width=250,bgc=[0.2,0.15,0.3])
+sb.button(label='create polytorus',width=250,bgc=[0.2,0.15,0.3])
+
+sb.showWindow()
+
+--------------------------
+
+import maya.cmds as sb
+sb.window(title='basic window test1',widthHeight=(250,500),maximizeButton=False,minimizeButton=False,sizeable=False,backgroundColor=[0.5,0.2,0.3])
+sb.columnLayout(columnWidth=200,rowSpacing=10)
+btnsize=250
+sb.button(label='create polycone',width=btnsize,bgc=[0.2,0.15,0.3],command='print "hello"')
+sb.button(label='create polyCube',width=btnsize,bgc=[0.2,0.15,0.3])
+sb.button(label='create sphere',width=btnsize,bgc=[0.2,0.15,0.3])
+sb.button(label='create polyplane',width=btnsize,bgc=[0.2,0.15,0.3])
+sb.button(label='create polytorus',width=btnsize,bgc=[0.2,0.15,0.3])
+
+sb.showWindow()
+
+-------------------------
+
+import maya.cmds as sb
+
+def createsphere(*args):
+    sb.polySphere()
+    
+def createcone(*args):
+    sb.polyCone()
+    
+def createplane(*args):
+    sb.polyPlane()
+    
+def createcube(_):
+    sb.polyCube()
+    
+def delete2(_):
+    sb.select(all=1)
+    sb.delete()
+
+sb.window(title='basic window test1',widthHeight=(250,500),maximizeButton=False,minimizeButton=False,sizeable=False,backgroundColor=[0.5,0.2,0.3])
+sb.columnLayout(columnWidth=200,rowSpacing=10)
+btnsize=250
+
+sb.button(label='create polycone',width=btnsize,bgc=[0.2,0.15,0.3],command=createcone)
+sb.button(label='create polyCube',width=btnsize,bgc=[0.2,0.15,0.3],command=createcube)
+sb.button(label='create sphere',width=btnsize,bgc=[0.2,0.15,0.3],command=createsphere)
+sb.button(label='create polyplane',width=btnsize,bgc=[0.2,0.15,0.3],command=createplane)
+sb.button(label='delete all',width=btnsize,bgc=[0.2,0.15,0.3],command=delete2)
+
+sb.showWindow()
+
+----------------------------
+
+import maya.cmds as sb
+
+def createsphere(*args):
+    sb.polySphere()
+    
+def createcone(*args):
+    sb.polyCone()
+    
+def createplane(*args):
+    sb.polyPlane()
+    
+def createcube(_):
+    sb.polyCube()
+    
+def delete2(_):
+    sb.select(all=1)
+    sb.delete()
+def createpyramid(_):
+    sb.polyPyramid()
+    
+def createtorus(_):
+    sb.polyTorus()
+sb.window(title='basic window test1',widthHeight=(250,500),maximizeButton=False,minimizeButton=False,sizeable=False,backgroundColor=[0.5,0.2,0.3])
+sb.columnLayout(columnWidth=200,rowSpacing=10)
+btnsize=250
+
+sb.button(label='createsphere',width=btnsize,bgc=[0.2,0.15,0.3],command=createsphere)
+sb.button(label='createpyramid',width=btnsize,bgc=[0.2,0.15,0.3],command=createpyramid)
+sb.button(label='createcube',width=btnsize,bgc=[0.2,0.15,0.3],command=createcube)
+sb.button(label='createcone',width=btnsize,bgc=[0.2,0.15,0.3],command=createcone)
+sb.button(label='createtorus',width=btnsize,bgc=[0.2,0.15,0.3],command=createtorus)
+
+sb.showWindow()
+
+------------------------------
+
+import maya.cmds as sb
+
+winID='myWindows'
+
+if sb.window(winID,exists=True):
+    sb.deleteUI(winID)
+    
+def callPromptDialog(_):
+    storeData=sb.promptDialog(title='Size of Sphere',message='enter radius',button=['Sphere','Cube','Cone'])
+    print 'data is '+ str(storeData)
+    
+    if (storeData=='Sphere'):
+        sb.polySphere()
+    if (storeData=='Cube'):
+        sb.polyCube()
+    if (storeData=='Cone'):
+        sb.polyCone()
+        
+       
+    
+sb.window(winID,title='tool for dialog',widthHeight=(250,500),maximizeButton=False,minimizeButton=False,sizeable=False,backgroundColor=[0.5,0.2,0.3])
+
+sb.columnLayout(rs=10)
+sb.button(l='call promtdialog',w=250,command=callPromptDialog)
+
+sb.showWindow()
+
+---------------------------
+
+import maya.cmds as sb
+
+winID='myWindows'
+
+if sb.window(winID,exists=True):
+    sb.deleteUI(winID)
+
+def deleteall(_):
+    sb.select(all=1)
+    sb.delete()    
+
+def callPromptDialog2(_):
+    result=sb.promptDialog(title='number of object',message='input number of object',button=['sphere','cube'])
+    numb=sb.promptDialog(query=True,text=True)
+    num=int(numb)
+    if (result=='sphere'):
+        for i in range(0,num):
+            sb.polySphere()
+            sb.move(0,i*2,0)
+            
+    if (result=='cube'):
+        for i in range(0,num):
+            sb.polyCube()
+            sb.move(0,i*2,0)
+
+def callPromptDialog(*size):
+    storeData=sb.promptDialog(title='Size of object',message='enter size of object',button=['Sphere','Cube','Cone'])
+    print 'data is '+ str(storeData)
+    dataFromInputPromptDialog=sb.promptDialog(query=True,text=True)
+    num=int(dataFromInputPromptDialog)
+    if (storeData=='Sphere'):
+        for i in range(0,num):
+            sb.polySphere(r=num)
+            sb.move(num*i*2,0,0)
+    if (storeData=='Cube'):
+        for i in range(0,num):
+            sb.polyCube(w=num,d=num,h=num)
+            sb.move(num*i*2,0,0)
+        
+    if (storeData=='Cone'):
+        for i in range(0,num):
+            sb.polyCone(r=num)
+            sb.move(num*i*2,0,0)
+            
+def callcolor(_):
+    sb.colorEditor()
+    RGBValue=sb.colorEditor(rgb=True,query=True)
+    sb.confirmDialog(t='color you choose',m='color is '+str(RGBValue))
+    
+    HSVValue=sb.colorEditor(hsv=True,query=True)
+    sb.confirmDialog(t='color you choose',m='hsv is '+str(HSVValue))
+    
+    AlphaValue=sb.colorEditor(alpha=True,query=True)
+    sb.confirmDialog(t='color you choose',m='alpha is '+str(AlphaValue))
+    
+    
+def callfont(_):
+    fontname=sb.fontDialog()
+    sb.confirmDialog(t='font you choose',message='font is '+str(fontname))
+    
+sb.window(winID,title='tool for dialog',widthHeight=(250,500),maximizeButton=False,minimizeButton=False,sizeable=False,backgroundColor=[0.5,0.2,0.3])
+
+sb.columnLayout(rs=10)
+sb.button(l='build stuff',w=250,command=callPromptDialog,bgc=[1,1,1])
+sb.button(l='num of object',w=250,command=callPromptDialog2,bgc=[1,1,1])
+sb.button(l='color',w=250,command=callcolor,bgc=[1,1,1])
+sb.button(l='font',w=250,command=callfont,bgc=[1,1,1])
+sb.button(l='Delete All',w=250,bgc=[1,0,0],command=deleteall)
+
+sb.showWindow()
+
+--------------------------------------
+
+import maya.cmds as sb
+winID='myWindows2'
+
+if sb.window(winID,exists=True):
+    sb.deleteUI(winID)
+
+def createpolygon(_):
+    sb.polySphere()
+    
+sb.window(winID,title='tool for dialog',widthHeight=(600,200),maximizeButton=False,minimizeButton=False,sizeable=False,bgc=[0.3,0.5,0])
+sb.rowLayout(numberOfColumns=4)
+sb.text(label='number of sphere')
+#num=sb.intField(bgc=[1,0,1])
+sb.intField('num',bgc=[0.5,0.3,0.7])
+def deleteall(_):
+    sb.select(all=1)
+    sb.delete()
+def createpolygon(_):
+    #nums=sb.intField(num, q=True, value=True)
+    nums=sb.intField('num', q=True, value=True)
+    for i in range(0,nums):
+        sb.polySphere()
+        sb.move(i*2,0,0)
+sb.button(label='create',bgc=[1,1,1],command=createpolygon)
+sb.button(label='delete all',bgc=[1,0,0],command=deleteall)
+sb.showWindow()
+
+-----------------------------------
+
+import maya.cmds as sb
+winID='myWindows2'
+
+if sb.window(winID,exists=True):
+    sb.deleteUI(winID)
+    
+sb.window(winID,title='tool for dialog',widthHeight=(600,200),maximizeButton=False,minimizeButton=False,sizeable=False,bgc=[0.3,0.5,0])
+sb.rowColumnLayout(numberOfColumns=3)
+sb.text(label='number of sphere')
+#num=sb.intField(bgc=[1,0,1])
+sb.intField('num',bgc=[0.5,0.3,0.7])
+def createpolygon(_):
+    #nums=sb.intField(num, q=True, value=True)
+    nums=sb.intField('num', q=True, value=True)
+    for i in range(0,nums):
+        sb.polySphere()
+        sb.move(i*2,0,0)
+sb.button(label='create',bgc=[1,1,1],command=createpolygon)
+
+
+sb.text(label='number of pyramid')
+#num=sb.intField(bgc=[1,0,1])
+sb.intField('num1',bgc=[0.5,0.3,0.7])
+def createpolygon1(_):
+    #nums=sb.intField(num, q=True, value=True)
+    nums=sb.intField('num1', q=True, value=True)
+    for i in range(0,nums):
+        sb.polyPyramid()
+        sb.move(i*2,0,0)
+sb.button(label='create',bgc=[1,1,1],command=createpolygon1)
+
+
+sb.text(label='number of torus')
+#num=sb.intField(bgc=[1,0,1])
+sb.intField('num2',bgc=[0.5,0.3,0.7])
+def createpolygon2(_):
+    #nums=sb.intField(num, q=True, value=True)
+    nums=sb.intField('num2', q=True, value=True)
+    for i in range(0,nums):
+        sb.polyTorus()
+        sb.move(i*2,0,0)
+sb.button(label='create',bgc=[1,1,1],command=createpolygon2)
+
+sb.text(label='number of cone')
+#num=sb.intField(bgc=[1,0,1])
+sb.intField('numa',bgc=[0.5,0.3,0.7])
+def createpolygon3(_):
+    #nums=sb.intField(num, q=True, value=True)
+    nums=sb.intField('numa', q=True, value=True)
+    for i in range(0,nums):
+        sb.polyCone()
+        sb.move(i*2,0,0)
+sb.button(label='create',bgc=[1,1,1],command=createpolygon3)
+
+sb.text(label='number of cube')
+#num=sb.intField(bgc=[1,0,1])
+sb.intField('numb',bgc=[0.5,0.3,0.7])
+def deleteall(_):
+    sb.select(all=1)
+    sb.delete()
+def createpolygon4(_):
+    #nums=sb.intField(num, q=True, value=True)
+    nums=sb.intField('numb', q=True, value=True)
+    for i in range(0,nums):
+        sb.polyCube()
+        sb.move(i*2,0,0)
+sb.button(label='create',bgc=[1,1,1],command=createpolygon4)
+
+sb.button(label='delete all',bgc=[1,0,0],command=deleteall)
+sb.showWindow()
+
+-------------------------------------------
+
+
+import maya.cmds as sb
+winID='myWindows2'
+
+if sb.window(winID,exists=True):
+    sb.deleteUI(winID)
+    
+sb.window(winID,title='tool for dialog',widthHeight=(600,200),maximizeButton=False,minimizeButton=False,sizeable=False,bgc=[0.3,0.5,0])
+sb.rowColumnLayout(nc=3,cw=[(1,50),(2,100),(3,150)])
+for i in range(0,15):
+    sb.text(label=1,bgc=[0,0,0],w=20)
+    sb.text(label=2,bgc=[0,1,0],w=20)
+    sb.text(label=3,bgc=[0,0,1],w=20)
+sb.showWindow()
+
+-----------------------------------------
+
+import maya.cmds as sb
+winID='myWindows4'
+
+if sb.window(winID,exists=True):
+    sb.deleteUI(winID)
+    
+sb.window(winID,title='tool for dialog',widthHeight=(320,320),maximizeButton=False,minimizeButton=False,sizeable=False,bgc=[0.3,0.5,0])
+
+sb.gridLayout(nc=4,cellWidthHeight=(80,80))
+for i in range(0,16):
+    sb.button()
+sb.showWindow()
+
+-----------------------------------------
+
+import maya.cmds as sb
+winID='myWindowsp11'
+
+if sb.window(winID,exists=True):
+    sb.deleteUI(winID)
+    
+sb.window(winID,title='tool for dialog',widthHeight=(500,500),maximizeButton=False,minimizeButton=False,sizeable=False,bgc=[0.3,0.5,0])
+sb.rowColumnLayout(nc=3)
+def createcube(_):
+    nums=sb.intField('myIntField', q=True, value=True)
+    sb.polyCube(w=nums,d=nums,h=nums)
+sb.text(l='create cube with free size')
+sb.intField('myIntField',bgc=[1,0,1],minValue=0,maxValue=100,value=50,step=5)
+sb.button(l='createCube',command=createcube)
+#----------
+def ccv2(_):
+    val=sb.intFieldGrp('myIntFieldGRP',q=1,value1=1)
+    val1=sb.intFieldGrp('myIntFieldGRP',q=1,value2=1)
+    val2=sb.intFieldGrp('myIntFieldGRP',q=1,value3=1)
+    
+    sb.polyCube(w=val1,d=val,h=val2)
+sb.text(l='create cube v2')
+sb.intFieldGrp('myIntFieldGRP',bgc=[1,0,1],nf=3,l='size D W H',extraLabel='metre')
+sb.button(l='create cubev2',command=ccv2)
+#----------
+sb.text(l='int field slider')
+sb.intSlider('my infieldslider',bgc=[1,0,1])
+sb.button()
+#---------
+sb.text(l='int field slider froup')
+sb.intSliderGrp('myintfislidergrp',bgc=[1,0,1])
+sb.button()
+#---------
+
+sb.text(l='float Field')
+sb.floatField('myfloatField',bgc=[1,0,1])
+sb.button()
+#---------
+sb.text(l='float Field')
+sb.floatFieldGrp('myfloatFieldGRP',nf=3,bgc=[1,0,1])
+sb.button()
+#---------
+sb.text(l='float Field')
+sb.floatSlider('myfloatSlider',bgc=[1,0,1])
+sb.button()
+#---------
+def deleteall(_):
+    sb.select(all=1)
+    sb.delete()
+sb.button(l='delete',bgc=[1,0,0],command=deleteall)
+
+sb.showWindow()
+
+-----------------------------------
+
+import maya.cmds as sb
+winID='myWindowsp226'
+
+if sb.window(winID,exists=True):
+    sb.deleteUI(winID)
+    
+sb.window(winID,title='tool for dialog',widthHeight=(275,400),maximizeButton=False,minimizeButton=False,sizeable=False,bgc=[0.3,0.5,0])
+sb.rowColumnLayout(nc=2)
+
+sb.text(label='Enter H W D To Create Cube',bgc=[0,0,0],h=60)
+sb.text(label='Enter H R to create Cone',bgc=[1,1,1],h=60)
+
+sb.intField('ifg1cw')
+
+sb.intField('ifg2cone',bgc=[1,1,1])
+
+sb.intField('ifccd')
+
+sb.intField('ifcone2',bgc=[1,1,1])
+
+sb.intField('ifcubeh')
+
+def ccube(_):
+    w=sb.intField('ifg1cw',q=1,value=1)
+    d=sb.intField('ifccd',q=1,value=1)
+    h=sb.intField('ifcubeh',q=1,value=1)
+    
+    sb.polyCube(w=w,d=d,h=h)
+    
+def ccone(_):
+    h=sb.intField('ifg2cone',q=1,value=1)
+    r=sb.intField('ifcone2',q=1,value=1)
+    sb.polyCone(h=h,r=r)
+
+sb.button(label='cone',command=ccone,bgc=[1,1,1])
+
+sb.button(label='CreateCube',command=ccube,bgc=[0,0,0])
+
+
+sb.showWindow()
+--------------------------------
+
+import maya.cmds as sb
+winID='myWindowsp256'
+
+if sb.window(winID,exists=True):
+    sb.deleteUI(winID)
+    
+sb.window(winID,title='My Custom Tool',widthHeight=(270,450),maximizeButton=False,minimizeButton=False,sizeable=False,bgc=[0.4,0.5,0.1])
+
+def smartcreator(_):
+    cbcube=sb.checkBox('c1',q=1,v=1)
+    cbcone=sb.checkBox('c2',q=1,v=1)
+    cbsphere=sb.checkBox('c3',q=1,v=1)
+    cbcylinder=sb.checkBox('c4',q=1,v=1)
+    n=sb.intSliderGrp('mysliderr',q=1,v=1)
+    va1=sb.intSliderGrp('myslider',q=1,v=1)
+    va2=sb.intSliderGrp('myslider1',q=1,v=1)
+    va3=sb.intSliderGrp('myslider2',q=1,v=1)
+    if cbcube:
+        for i in range(0,n):
+            sb.polyCube(w=va1,d=va2,h=va3)
+            sb.move(i*va1,0,0)
+    if cbcone:
+        for i in range(0,n):
+            sb.polyCone(h=va1,r=va2)
+            sb.move(i*va2,0,0)
+    if cbsphere:
+        for i in range(0,n):
+            sb.polySphere(r=va1)
+            sb.move(i*va1,0,0)
+    if cbcylinder:
+        for i in range(0,n):
+            sb.polyCylinder(h=va1,r=va2)
+            sb.move(i*va2,0,0)
+sb.rowColumnLayout(nr=20,adj=True,ral=[(1,'center')])
+iconPath=sb.internalVar(upd=True)+'icons/1.png'
+#sb.image(w=200,h=200,image=iconPath,bgc=[1,0,1],ann='https://www.mytool.com')
+sb.image(w=270,h=200,image=iconPath,bgc=[0.2,0.3,0.02])
+sb.separator(h=8)
+sb.text(l='myTool')
+sb.separator(h=8)
+sb.text(l='number of object')
+sb.intSliderGrp('mysliderr',field=True)
+sb.separator(h=8)
+sb.intSliderGrp('myslider',field=True,fmx=500,fmn=10,fs=5,s=5,v=10,l='value',el='cm')
+sb.intSliderGrp('myslider1',field=True)
+sb.intSliderGrp('myslider2',field=True)
+sb.frameLayout('choose object')
+sb.rowLayout(nc=4)
+sb.checkBox('c1',label='Cube')
+sb.checkBox('c2',label='Cone')
+sb.checkBox('c3',label='Sphere')
+sb.checkBox('c4',label='Cylinder')
+
+sb.setParent('..')
+sb.setParent('..')
+sb.button(label='create',bgc=[0,0,0],command=smartcreator)
+def deleteall(_):
+    sb.select(all=1)
+    sb.delete()
+sb.button(label='delete all',bgc=[1,0,0],command=deleteall)
+
+sb.showWindow()
+
+---------------------------------------------
+
+import maya.cmds as sb
+winID='myWindowsp260'
+
+if sb.window(winID,exists=True):
+    sb.deleteUI(winID)
+    
+sb.window(winID,title='My Custom Tool',widthHeight=(270,450),maximizeButton=False,minimizeButton=False,sizeable=False,bgc=[0.4,0.5,0.1])
+
+sb.scrollLayout()
+sb.columnLayout()
+sb.frameLayout('My first frame')
+sb.columnLayout()
+sb.button()
+sb.intField()
+sb.checkBox()
+sb.setParent('..')
+sb.setParent('..')
+
+sb.frameLayout('My second frame')
+sb.rowLayout(nc=3)
+sb.button()
+sb.intField()
+sb.checkBox()
+sb.setParent('..')
+sb.setParent('..')
+
+sb.frameLayout('My third frame')
+sb.rowLayout(nc=4)
+sb.checkBox('c1',label='Cube')
+sb.checkBox('c2',label='Cone')
+sb.checkBox('c3',label='Sphere')
+sb.checkBox('c4',label='Cylinder')
+
+sb.setParent('..')
+sb.setParent('..')
+
+sb.showWindow()
+
+-----------------------------------------
+
+import maya.cmds as sb
+winID='myWindowsp268'
+
+if sb.window(winID,exists=True):
+    sb.deleteUI(winID)
+    
+sb.window(winID,title='My Custom Tool',widthHeight=(270,450),maximizeButton=False,minimizeButton=False,sizeable=False,bgc=[0.4,0.5,0.1])
+def c1(_):
+    sb.showWindow('ww1')
+def c2(_):
+    sb.showWindow('ww2')
+def c3(_):
+    sb.showWindow('ww3')
+sb.columnLayout()
+sb.button(l='call window 1',command=c1)
+sb.button(l='call window 2',command=c2)
+sb.button(l='call window 3',command=c3)
+
+sb.window('ww1',bgc=[0.9,0.7,0.8])
+sb.window('ww2',bgc=[0,1,0],widthHeight=(300,300))
+sb.window('ww3',bgc=[1,0,0],widthHeight=(300,300))
+sb.showWindow(winID)
+
+-----------------------------------
