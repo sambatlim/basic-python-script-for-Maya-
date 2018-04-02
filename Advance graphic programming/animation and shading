@@ -164,3 +164,85 @@ sb.polyBevel(o=0.15)
 sb.select('cube.f[13]')
 sb.hyperShade(a='myTexture')
 sb.polyProjection('cube.f[13]',t='planar',md='z')
+
+--------------------------------------------
+
+import maya.cmds as sb
+
+sb.shadingNode('lambert',asShader=1,n="skin")
+sb.shadingNode('ramp',at=1,n='myrampo')
+sb.connectAttr('myrampo.oc','skin.c')
+
+sb.polyPlane(n='myplane',w=5,h=5,sx=1,sy=1)
+sb.hyperShade(a='skin')
+
+sb.select('myrampo')
+sb.setAttr('myrampo.cel[0].ec',1,0,0,type='double3')
+sb.setAttr('myrampo.cel[0].ep',0.15)
+sb.setAttr('myrampo.cel[1].ec',0.5,0.2,0.3,type='double3')
+sb.setAttr('myrampo.cel[2].ec',0.5,1,0.3,type='double3')
+
+-------------------------------------
+
+import maya.cmds as sb
+
+sb.shadingNode('lambert',asShader=1,n="skin")
+sb.shadingNode('ramp',at=1,n='myrampo')
+sb.connectAttr('myrampo.oc','skin.c')
+
+sb.polyPlane(n='myplane',w=5,h=5,sx=1,sy=1)
+sb.hyperShade(a='skin')
+
+sb.select('myrampo')
+sb.setAttr('myrampo.in',0)
+
+sb.setAttr('myrampo.cel[0].ec',1,0,0,type='double3')
+sb.setAttr('myrampo.cel[0].ep',0)
+sb.setAttr('myrampo.cel[1].ec',1,1,1,type='double3')
+sb.setAttr('myrampo.cel[1].ep',0.2)
+sb.setAttr('myrampo.cel[2].ec',0,0,1,type='double3')
+sb.setAttr('myrampo.cel[2].ep',0.3)
+sb.setAttr('myrampo.cel[3].ec',1,1,1,type='double3')
+sb.setAttr('myrampo.cel[3].ep',0.7)
+sb.setAttr('myrampo.cel[4].ec',1,0,0,type='double3')
+sb.setAttr('myrampo.cel[4].ep',0.8)
+sb.setAttr('myrampo.cel[5].ec',0,1,0,type='double3')
+sb.setAttr('myrampo.cel[5].ep',1)
+
+sb.setAttr('myrampo.t',0)
+sb.setAttr('myrampo.vw',0.6)
+
+sb.setAttr('myrampo.n',0)
+sb.setAttr('myrampo.nf',0.1)
+
+sb.expression(o='myrampo',s='n=0.1+sin(time*2.5)*0.5')
+sb.expression(o='myrampo',s='vw=0.1+sin(time*0.5)*0.5')
+
+---------------------------------------
+
+import maya.cmds as sb
+import math
+sb.file(f=1,newFile=1)
+
+#sb.polyCube(n='mycube')
+
+a=10
+f=1
+k=0.5
+for z in range(-30,30):
+    mycube=sb.polyCube(n='mycube%d'%z)
+    sb.move(0,0,z)
+    sb.expression(o=mycube[0],s='ty=exp(-%f*time)*%f*cos(2*%f*%f*(time-tz/20));'%(k,a,math.pi,f))
+
+
+'''
+sb.expression(o='mycube',s='rx=%f*time;ty=%f*time;tz=%f*time'%(f,a,a))
+
+sb.expression(o='mycube',s='ty=exp(%f*time)*%f*cos(2*%f*%f*time);'%(k,a,math.pi,f))
+
+'''
+# using mel to help
+sb.expression(s="$a=5;$f=2;$const=0.6;$pi=3.141516;mycube.ty=exp($const*time)*$a*cos(2*$pi*$f*time);")
+'''
+
+'''
