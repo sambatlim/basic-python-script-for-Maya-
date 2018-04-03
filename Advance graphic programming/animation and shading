@@ -246,3 +246,98 @@ sb.expression(s="$a=5;$f=2;$const=0.6;$pi=3.141516;mycube.ty=exp($const*time)*$a
 '''
 
 '''
+----------------------------------------
+
+import maya.cmds as sb
+sb.file (f=1,newFile=1)
+
+for i in range(160):
+    mycl=sb.polyCylinder(n='mycube%d'%i,r=0.5)
+    sb.move(i,0,0)
+    
+    sb.expression(o=mycl[0],s='ty=25*time*pow(cos(tx/10)*time,2)')
+    sb.expression(o=mycl[1],s='h=30')
+    
+----------------------------------------
+
+import maya.cmds as sb
+sb.file (f=1,newFile=1)
+
+sb.polyCube()
+
+for n in ['pCube1','pCubeShape1','polyCube1','initialShadingGroup','lambert1']:
+    print(n+u'Node type is'+sb.nodeType(n))
+    
+myshading=sb.shadingNode('blinn',asShader=1)
+
+sb.setAttr(myshading+'.c',1,0,0,type='double3')
+
+------------------------------------------
+
+import maya.cmds as sb
+sb.file (f=1,newFile=1)
+
+sb.polyCube(n='mycube')
+
+    
+myshading=sb.shadingNode('blinn',asShader=1)
+
+sb.setAttr(myshading+'.c',1,0,0,type='double3')
+
+sb.select('mycube')
+sb.hyperShade(a=myshading)
+print(sb.ls())
+print(len(sb.ls()))
+sb.ls(type='transform')
+sb.ls(sl=1)
+sb.ls(ca=1)
+
+sb.select('mycube')
+sb.setKeyframe(at='rx',v=0,t=1)
+sb.setKeyframe(at='rx',v=360,t=30)
+print(sb.listConnections('mycube'))
+
+-----------------------------------
+import maya.cmds as sb
+sb.file (f=1,newFile=1)
+
+sb.modelEditor(sb.getPanel(wf=1),e=1,dl='all')
+sb.shadingNode('ambientLight',al=1)
+sb.shadingNode('directionalLight',al=1)
+sb.shadingNode('pointLight',al=1)
+sb.shadingNode('spotLight',al=1)
+sb.shadingNode('areaLight',al=1)
+sb.shadingNode('volumeLight',al=1)
+
+------------------------------------
+
+import maya.cmds as sb
+sb.file (f=1,newFile=1)
+
+sb.directionalLight(n='Light1')
+sb.polyCube(w=2,h=3,d=5)
+sb.select('Light1')
+sb.move(0,0,5)
+
+---------------------------------
+
+import maya.cmds as sb
+sb.file (f=1,newFile=1)
+
+sb.directionalLight(n='Light1')
+sb.polyCube(w=2,h=3,d=5)
+sb.select('Light1')
+sb.move(0,0,5)
+sb.setAttr('Light1.ty',5)
+sb.setAttr('Light1.rx',-30)
+sb.setAttr('Light1.in',5)
+sb.setAttr('Light1.dms',1)
+sb.setAttr('Light1.dr',4096*2)
+sb.setAttr('Light1.cl',1,0,0,type='double3')
+sb.setAttr('Light1.sc',0,1,0,type='double3')
+
+sb.select('Light1')
+sb.setKeyframe(at='rx',v=0,t=1)
+sb.setKeyframe(at='rx',v=360,t=120)
+sb.expression(o='Light1',s='rx=50*time')
+sb.polyPlane(w=50,h=50)
