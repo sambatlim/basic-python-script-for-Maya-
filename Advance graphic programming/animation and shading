@@ -540,3 +540,37 @@ sb.hyperShade(a=sh1)
 sb.setAttr(sh1+'.c',1,1,1,type='double3')
 
 --------------------------------------------
+
+import maya.cmds as sb
+sb.file(f=True,newFile=True)
+
+sb.polyPlane(w=100,h=100)
+sb.ambientLight(n='AL')
+sb.move(0,5,0)
+
+sb.polyCube(n='myCube')
+sb.move(0,0.5,0)
+
+sb.select('AL')
+sb.ambientLight(n='AL',e=True,rgb=[1,1,0])
+
+sb.spotLight(n='SL',i=1.5,p=10,do=0.5,rgb=(1,0,1))
+sb.move(0,8,0)
+sb.rotate(-90,0,0)
+
+-----------------------------------------------
+
+import maya.cmds as sb
+import random
+sb.file(f=True,newFile=True)
+
+sb.polyPlane(n='pp',w=100,h=100,sx=20,sy=20)
+for i in range(0,sb.polyEvaluate('pp',v=1)):
+    d=sb.xform('pp.vtx['+str(i)+']',q=1,t=1,ws=1)
+    sb.polyCube()
+    sb.move(d[0],d[1]+0.5,d[2],r=1)
+    sb.spotLight(n='SL'+str(i),i=random.randint(0,5),p=5,do=3,rgb=(random.uniform(0.1,1),random.uniform(0.1,1),random.uniform(0.1,1)))
+    sb.rotate(-90,0,0)
+    sb.move(d[0],d[1]+5,d[2],r=1)
+    nu=random.randint(50,200)
+    sb.expression(o='SL'+str(i),s='rx=%f*time;'%(nu))
