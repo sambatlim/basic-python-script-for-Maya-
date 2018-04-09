@@ -574,3 +574,14 @@ for i in range(0,sb.polyEvaluate('pp',v=1)):
     sb.move(d[0],d[1]+5,d[2],r=1)
     nu=random.randint(50,200)
     sb.expression(o='SL'+str(i),s='rx=%f*time;'%(nu))
+    
+----------------------------------------------------
+import maya.cmds as sb
+import random
+sb.file(f=True,newFile=True)
+
+for i in range(0,100):
+    sb.pointLight(n='pl'+str(i),rgb=(random.uniform(0.1,1),random.uniform(0.1,1),random.uniform(0.1,1)),i=2,d=2)
+    sb.sphere(n='s'+str(i))
+    sb.group('pl'+str(i),'s'+str(i),n='c'+str(i))
+    sb.move(random.uniform(-50,50),random.uniform(1,51),random.uniform(-50,50))
