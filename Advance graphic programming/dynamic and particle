@@ -43,3 +43,20 @@ sb.connectDynamic('emittedparticle',em='myemitter')
 sb.particleInstancer('emittedparticleShape',addObject=True,object=['myCubeShape','mySphereShape','myConeShape'],age='age',cycle='sequential',cycleStep=50,cycleStepUnits='Frames')
 
 -----------------------------------------------
+import maya.cmds as sb
+import random
+sb.file(f=True,newFile=True)
+sb.polyPlane(w=50,h=50,n='myplane')
+sb.emitter(r=100,mnd=1,mxd=10,n='myemitter',pos=(-25,3,25),type='volume',vsh='torus',vsw=180)
+sb.emitter(r=100,mnd=2,mxd=5,n='myemitter1',pos=(25,3,25))
+sb.emitter(r=100,mnd=2,mxd=5,n='myemitter2',pos=(25,3,-25))
+sb.emitter(r=100,mnd=2,mxd=5,n='myemitter3',pos=(-25,3,-25))
+sb.gravity(pos=(0,0,0),m=9.8,n='GF')
+sb.particle(n='emittedparticle')
+sb.connectDynamic('emittedparticle',f='GF')
+sb.connectDynamic('emittedparticle',em='myemitter')
+sb.connectDynamic('emittedparticle',em='myemitter1')
+sb.connectDynamic('emittedparticle',em='myemitter2')
+sb.connectDynamic('emittedparticle',em='myemitter3')
+
+----------------------------------------------
