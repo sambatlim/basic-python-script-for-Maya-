@@ -60,3 +60,32 @@ sb.connectDynamic('emittedparticle',em='myemitter2')
 sb.connectDynamic('emittedparticle',em='myemitter3')
 
 ----------------------------------------------
+
+import maya.cmds as sb
+import random
+sb.file(f=True,newFile=True)
+sb.polyPlane(w=50,h=50,n='myPlane')
+sb.polyCone(n='myCube')
+sb.polySphere(n='mySphere')
+sb.polyCube(n='myCone')
+sb.emitter(r=50,mnd=1,mxd=20,n='myemitter',pos=(0,3,0),afx=1,alx=0,arx=0,afc=1,spd=10,type='volume',vsh='cone',vsw=360)
+sb.particle(n='emittedparticle')
+sb.gravity(pos=(0,0,0),m=9.8,n='GF')
+sb.rigidSolver(create=True,name='rigidSolver1')
+sb.select('myPlane')
+sb.rigidBody(passive=True,solver='rigidSolver1',name='passiveRigidBody')
+sb.select('myCube')
+sb.rigidBody(active=True,solver='rigidSolver1',name='activeRigidBody1')
+sb.select('mySphere')
+sb.rigidBody(active=True,solver='rigidSolver1',name='activeRigidBody2')
+sb.select('myCone')
+sb.rigidBody(active=True,solver='rigidSolver1',name='activeRigidBody3')
+sb.collision('myPlane','emittedparticle',r=0.75,f=0.1)
+
+sb.connectDynamic('activeRigidBody1',c='myPlane')
+sb.connectDynamic('activeRigidBody2',c='myPlane')
+sb.connectDynamic('activeRigidBody3',c='myPlane')
+
+sb.connectDynamic('emittedparticle',f='GF')
+sb.connectDynamic('emittedparticle',em='myemitter')
+sb.particleInstancer('emittedparticleShape',addObject=True,object=['myCubeShape','mySphereShape','myConeShape'],age='age',cycle='sequential',cycleStep=50,cycleStepUnits='Frames')
