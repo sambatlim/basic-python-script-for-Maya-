@@ -136,3 +136,107 @@ sb.rigidBody(active=True,solver='myRigidSolver',n='spr',i=[0,0,3])
 sb.connectDynamic('spr',f='mgf')
 
 --------------------------------------------------------------
+
+import maya.cmds as sb
+import random
+sb.playbackOptions(min=1,max=500)
+sb.file(f=True,newFile=True)
+sb.polyPlane(w=100,h=100,n='myFloor')
+sb.gravity(pos=(0,0,0),m=9.8,n='mgf')
+sb.rigidSolver(create=True,n='myRigidSolver')
+sb.select('myFloor')
+sb.rigidBody(passive=True,solver='myRigidSolver',n='rb2')
+
+sb.file('C:\Users\PSUIC\Desktop\source\kontis_kohoutky.FBX',i=True,type='FBX')
+
+for i in range(1,3):
+    for j in range(1,6):
+        sb.polyCylinder(n='pc'+str(i)+str(j))
+        sb.move(j*2,1,i*2)
+        sb.rigidBody(active=True,solver='myRigidSolver',n='mycubeactive'+str(i)+str(j))
+        sb.connectDynamic('mycubeactive'+str(i)+str(j),f='mgf')
+        
+sb.polySphere(n='sp')
+sb.move(2,1,-5)
+sb.rigidBody(active=True,solver='myRigidSolver',n='spr',i=[0,0,3])
+sb.connectDynamic('spr',f='mgf')
+
+
+sb.select('kontis_kohoutky')
+
+for i in range(1,5):
+    sb.select('kontis_kohoutky')
+    sb.duplicate(st=1,n='box%d'%i)
+    sb.select('box%d'%i)
+    sb.rigidBody(active=True,solver='myRigidSolver',n='myboxrig%d'%i)
+    sb.connectDynamic('myboxrig%d'%i,f='mgf')
+    
+ -------------------------------------------------------
+ 
+ import maya.cmds as sb
+import random
+sb.playbackOptions(min=1,max=500)
+sb.file(f=True,newFile=True)
+sb.polyPlane(w=50,h=28,n='myFloor')
+sb.gravity(pos=(0,0,0),m=9.8,n='mgf')
+sb.rigidSolver(create=True,n='myRigidSolver')
+sb.select('myFloor')
+sb.rigidBody(passive=True,solver='myRigidSolver',n='rb2')
+sb.rotate(0,0,-60)
+for i in range(1,5):
+    sb.polySphere(n='s'+str(i))
+    sb.move(0,0,i*6)
+    sb.rigidBody(passive=True,solver='myRigidSolver',n='r'+str(i))
+    
+sb.group('s1','s2','s3','s4',n='rs1')
+
+for i in range(1,5):
+    sb.polySphere(n='ss'+str(i))
+    sb.move(0,0,i*6)
+    sb.rigidBody(passive=True,solver='myRigidSolver',n='r'+str(i))
+sb.group('ss1','ss2','ss3','ss4',n='rs2')
+sb.move(-4,8,0) 
+  
+for i in range(1,5):
+    sb.polySphere(n='sss'+str(i))
+    sb.move(0,0,i*6)
+    sb.rigidBody(passive=True,solver='myRigidSolver',n='r'+str(i))
+sb.group('sss1','sss2','sss3','sss4',n='rs3')
+sb.move(-8,14,0)
+
+for i in range(1,6):
+    sb.polySphere(n='j'+str(i))
+    sb.move(0,0,i*6)
+    sb.rigidBody(passive=True,solver='myRigidSolver',n='rr'+str(i))
+    
+sb.group('j1','j2','j3','j4','j5',n='rs4')
+sb.move(-2,4.5,-2)
+
+for i in range(1,6):
+    sb.polySphere(n='jj'+str(i))
+    sb.move(0,0,i*6)
+    sb.rigidBody(passive=True,solver='myRigidSolver',n='rr'+str(i))
+sb.group('jj1','jj2','jj3','jj4','jj5',n='rs5')
+sb.move(-6,11,-2)
+for i in range(1,6):
+    sb.polySphere(n='jjj'+str(i))
+    sb.move(0,0,i*6)
+    sb.rigidBody(passive=True,solver='myRigidSolver',n='rr'+str(i))
+sb.group('jjj1','jjj2','jjj3','jjj4','jjj5',n='rs6')
+sb.move(-10,18,-2)
+sb.group('rs1','rs2','rs3','rs4','rs5','rs6',n='newsss')
+sb.move(0,0,-15)
+sb.polySphere(n='ball')
+sb.move(-11,20,0)
+sb.rigidBody(active=True,solver='myRigidSolver',n='myballr')
+sb.connectDynamic('myballr',f='mgf')
+sb.polyPlane(w=50,h=28,n='ssdd')
+sb.move(0,-3,0)
+sb.rigidBody(passive=True,solver='myRigidSolver',n='myplane4',b=0.5)
+for i in range(1,6):
+    sb.polyCube(w=2,d=0.5,h=2,n='c'+str(i))
+    sb.move(2,-2.5,i*5)
+    sb.rigidBody(passive=True,solver='myRigidSolver')
+    
+sb.group('c1','c2','c3','c4','c5',n='newww')
+sb.move(1,0,-13)
