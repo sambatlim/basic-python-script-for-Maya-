@@ -89,3 +89,50 @@ sb.connectDynamic('activeRigidBody3',c='myPlane')
 sb.connectDynamic('emittedparticle',f='GF')
 sb.connectDynamic('emittedparticle',em='myemitter')
 sb.particleInstancer('emittedparticleShape',addObject=True,object=['myCubeShape','mySphereShape','myConeShape'],age='age',cycle='sequential',cycleStep=50,cycleStepUnits='Frames')
+
+--------------------------------------------------------
+
+import maya.cmds as sb
+import random
+sb.playbackOptions(min=1,max=500)
+sb.file(f=True,newFile=True)
+sb.polyPlane(w=100,h=100,n='myFloor')
+
+sb.gravity(pos=(0,0,0),m=9.8,n='mgf')
+sb.rigidSolver(create=True,n='myRigidSolver')
+
+for i in range(1,6):
+    sb.polyCube(n='name1'+str(i))
+    sb.move(i*2,10,0)
+    sb.rigidBody(active=True,solver='myRigidSolver',n='mycubeactive'+str(i),i=[0,-5,2])
+    sb.connectDynamic('mycubeactive'+str(i),f='mgf')
+sb.select('myFloor')
+sb.rotate(30,0,0)
+sb.rigidBody(passive=True,solver='myRigidSolver',n='rb2',b=0.1,dp=-2)
+
+----------------------------------------------------------
+
+import maya.cmds as sb
+import random
+sb.playbackOptions(min=1,max=500)
+sb.file(f=True,newFile=True)
+sb.polyPlane(w=100,h=100,n='myFloor')
+sb.gravity(pos=(0,0,0),m=9.8,n='mgf')
+sb.rigidSolver(create=True,n='myRigidSolver')
+sb.select('myFloor')
+sb.rigidBody(passive=True,solver='myRigidSolver',n='rb2')
+
+
+for i in range(1,3):
+    for j in range(1,6):
+        sb.polyCylinder(n='pc'+str(i)+str(j))
+        sb.move(j*2,1,i*2)
+        sb.rigidBody(active=True,solver='myRigidSolver',n='mycubeactive'+str(i)+str(j))
+        sb.connectDynamic('mycubeactive'+str(i)+str(j),f='mgf')
+        
+sb.polySphere(n='sp')
+sb.move(2,1,-5)
+sb.rigidBody(active=True,solver='myRigidSolver',n='spr',i=[0,0,3])
+sb.connectDynamic('spr',f='mgf')
+
+--------------------------------------------------------------
